@@ -1,0 +1,11 @@
+Colocar aquí las fotografías históricas con estos nombres:
+- legado-1910.jpg
+- legado-ceima.jpg
+- legado-cali.jpg
+
+Conservar también los archivos ya existentes del sitio original:
+- logo-dimacsa.png
+- favicon.png
+- icon-192.png
+- icon-512.png
+- collage-cepillos-dimacsa.png
