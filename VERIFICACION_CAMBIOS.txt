@@ -1,0 +1,7 @@
+VERIFICACIÓN DE CAMBIOS — DIMACSA
+
+1. NOSOTROS / ARCHIVO HISTÓRICO FAMILIAR: se eliminó únicamente la fotografía independiente grande de la izquierda.
+2. Se conservaron intactas las otras dos fotografías históricas dentro de la misma sección.
+3. El recuadro “MEMORIA FAMILIAR / Una historia construida con trabajo, oficio y continuidad.” se alargó a todo lo ancho debajo de las dos fotografías para que la composición se vea uniforme.
+4. No se modificaron los textos, colores ni las demás secciones de la página.
+5. Archivos ajustados: index.html y styles.css.

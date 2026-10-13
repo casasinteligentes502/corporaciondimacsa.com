@@ -15,6 +15,36 @@ if (menuButton && menu) {
   });
 }
 
+// Reliable in-page navigation, especially for mobile menu links.
+function scrollToTarget(hash) {
+  const target = document.querySelector(hash);
+  const header = document.querySelector('.site-header');
+  const offset = header ? header.offsetHeight : 0;
+  if (hash === '#inicio') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  if (!target) return;
+  const top = target.getBoundingClientRect().top + window.pageYOffset - offset + 2;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+    const target = document.querySelector(hash);
+    if (!target && hash !== '#inicio') return;
+    event.preventDefault();
+    if (menu && menu.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      if (menuButton) menuButton.setAttribute('aria-expanded', 'false');
+    }
+    history.replaceState(null, '', hash);
+    scrollToTarget(hash);
+  });
+});
+
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 const revealItems = document.querySelectorAll('.reveal');
@@ -184,7 +214,6 @@ const translations = {
   "Enviar consulta por WhatsApp": "Send inquiry via WhatsApp",
   "El formulario abre WhatsApp con la información preparada; no almacena sus datos en este sitio.": "The form opens WhatsApp with the prepared information; it does not store your data on this website.",
   "Navegación": "Navigation",
-  "Llamar +502 3877 3515": "Call +502 3877 3515",
   "Cuatro generaciones de experiencia aplicadas a soluciones industriales.": "Four generations of experience applied to industrial solutions."
  };
 
@@ -305,7 +334,7 @@ document.querySelectorAll('[data-social-pending]').forEach(btn => {
 });
 
 // In-place galleries, keeping the original image cards and their positions.
-const dimacsaGalleries = {"instalados": ["assets/images/cepillos-instalados1.JPG", "assets/images/cepillos-instalados2.JPG", "assets/images/cepillos-instalados3.JPG", "assets/images/cepillos-instalados4.JPG", "assets/images/cepillos-instalados5.JPG"], "cilindricos": ["assets/images/cepillos-cilindricos1.jpg", "assets/images/cepillos-cilindricos2.jpg", "assets/images/cepillos-cilindricos3.jpg", "assets/images/cepillos-cilindricos4.jpg", "assets/images/cepillos-cilindricos5.jpg", "assets/images/cepillos-cilindricos6.jpg"], "circulares": ["assets/images/cepillos-circulares1.jpg", "assets/images/cepillos-circulares2.jpg", "assets/images/cepillos-circulares3.jpg"], "especiales": ["assets/images/cepillos-varios1.JPG", "assets/images/cepillos-varios2.JPG", "assets/images/cepillos-trenzados1.jpg"], "rotativos": ["assets/images/cepillo-rotativo1.JPG", "assets/images/cepillo-rotativo2.JPG", "assets/images/cepillo-rotativo3.JPG", "assets/images/cepillo-rotativo4.JPG", "assets/images/cepillo-rotativo5.JPG", "assets/images/cepillo-rotativo6.JPG"], "escobillones": ["assets/images/cepillos-belleza1.JPG", "assets/images/cepillos-belleza2.JPG", "assets/images/molineria1.png", "assets/images/molineria2.png", "assets/images/molineria3.png", "assets/images/molineria4.png"]};
+const dimacsaGalleries = {"circulares": ["assets/images/web/p-cirA.webp", "assets/images/web/p-cirB.webp", "assets/images/web/p-cirC.webp", "assets/images/web/p-cirD.webp"], "cilindricos": ["assets/images/web/p-cilA.webp", "assets/images/web/p-cilB.webp", "assets/images/web/p-cilC.webp", "assets/images/web/p-cilD.webp", "assets/images/web/p-cilE.webp"], "lineales": ["assets/images/web/p-linA.webp", "assets/images/web/p-linB.webp"], "rotativos": ["assets/images/web/p-rotA.webp", "assets/images/web/p-rotB.webp", "assets/images/web/p-rotC.webp", "assets/images/web/p-rotD.webp", "assets/images/web/p-rotE.webp"], "escobillones": ["assets/images/web/p-escA.webp", "assets/images/web/p-escB.webp", "assets/images/web/p-escC.webp"], "especiales": ["assets/images/web/p-estA.webp", "assets/images/web/p-estB.webp", "assets/images/web/p-estC.webp", "assets/images/web/p-estD.webp", "assets/images/web/p-estE.webp"], "filtracion": ["assets/images/web/p-filt.webp", "assets/images/web/p-filt2.webp", "assets/images/web/galeria-filtracion.webp"]};
 
 const galleryDialog=document.createElement('dialog');galleryDialog.className='dimacsa-gallery';galleryDialog.innerHTML='<button type="button" class="gallery-close" aria-label="Cerrar galería">×</button><button type="button" class="gallery-prev" aria-label="Anterior">‹</button><img alt="Producto DIMACSA"><button type="button" class="gallery-next" aria-label="Siguiente">›</button><p class="gallery-counter"></p>';document.body.appendChild(galleryDialog);
 let currentPhotos=[], currentPhotoIndex=0;
@@ -314,3 +343,83 @@ function openDimacsaGallery(key){currentPhotos=dimacsaGalleries[key]||[];if(!cur
 document.querySelectorAll('[data-gallery]').forEach(card=>{card.addEventListener('click',()=>openDimacsaGallery(card.dataset.gallery));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDimacsaGallery(card.dataset.gallery);}});});
 galleryDialog.querySelector('.gallery-close').addEventListener('click',()=>galleryDialog.close());galleryDialog.querySelector('.gallery-prev').addEventListener('click',()=>{currentPhotoIndex=(currentPhotoIndex-1+currentPhotos.length)%currentPhotos.length;showGalleryPhoto();});galleryDialog.querySelector('.gallery-next').addEventListener('click',()=>{currentPhotoIndex=(currentPhotoIndex+1)%currentPhotos.length;showGalleryPhoto();});galleryDialog.addEventListener('click',e=>{if(e.target===galleryDialog)galleryDialog.close();});
 document.querySelectorAll('.nav-social').forEach(b=>b.addEventListener('click',()=>showNotice(document.documentElement.lang==='en' ? b.dataset.socialPending+' link pending.' : 'Enlace de '+b.dataset.socialPending+' pendiente de confirmar.')));
+
+// Movimiento solo dentro de los recuadros de proyectos
+(function(){
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('.work-slides').forEach((box,idx)=>{
+    const imgs=box.querySelectorAll('img');if(imgs.length<2)return;let n=0;
+    setTimeout(()=>setInterval(()=>{imgs[n].classList.remove('is-active');n=(n+1)%imgs.length;imgs[n].classList.add('is-active');},3800),idx*600);
+  });
+  document.addEventListener('keydown',e=>{if(!galleryDialog.open)return;if(e.key==='ArrowRight')galleryDialog.querySelector('.gallery-next').click();if(e.key==='ArrowLeft')galleryDialog.querySelector('.gallery-prev').click();});
+})();
+Object.assign(translations,{
+"Ayúdenos a diseñar la pieza ideal para su proceso. Indíquenos qué problema necesita solucionar, en qué equipo operará el componente y cuál es su función principal. Nuestro equipo técnico evaluará sus datos para ofrecerle una solución hecha a la medida.":"Help us design the right part for your process. Tell us about the problem, the equipment and the component’s purpose. Our technical team will assess your information to offer a tailored solution.",
+"Fabricación Especializada":"Specialized Manufacturing","EQUIPAMIENTO":"EQUIPMENT","DIMACSA · INDUSTRIA · GUATEMALA":"DIMACSA · INDUSTRY · GUATEMALA","Saltar al contenido":"Skip to content","Teléfono":"Phone","Nuestra capacidad técnica:":"Our technical capabilities:",
+"Condiciones de operación (temperatura, presión y ciclos de trabajo).":"Operating conditions (temperature, pressure and duty cycles).",
+"Compatibilidad de materiales (fibras técnicas, polímeros y metales).":"Material compatibility (technical fibers, polymers and metals).",
+"Validación de medidas y diseño eficiente para su instalación. (El producto será fácil y rápido de instalar).":"Dimension validation and efficient design for installation (the product will be quick and easy to install).",
+"Precisión geométrica y mejora en los mecanismos de sujeción.":"Geometric precision and improved fastening mechanisms.",
+"Agroindustria y Procesamiento de Alimentos":"Agroindustry and Food Processing","Expertos en procesos que demandan alta higiene y eficiencia en el manejo de materia prima.":"Experts in processes that demand high hygiene and efficient raw-material handling.",
+"Manufactura, Construcción y Materiales":"Manufacturing, Construction and Materials","Soluciones técnicas para procesos de transformación, producción de piezas y materiales de alto impacto.":"Technical solutions for transformation processes, part production and high-impact materials.",
+"Sector Público, Mantenimiento e Infraestructura":"Public Sector, Maintenance and Infrastructure","Suministros técnicos para el mantenimiento, operatividad y soporte a entidades gubernamentales.":"Technical supplies for maintenance, operation and support of government entities.",
+"Industria General":"General Industry","Soluciones transversales y componentes de ingeniería aplicables a cualquier proceso productivo no categorizado.":"Cross-sector solutions and engineering components applicable to any uncategorized production process.",
+"Nuestra asesoría está diseñada para adaptarse a cualquier desafío operativo. Si su sector requiere una aplicación específica o un componente a la medida, nuestro equipo técnico está listo para analizar su requerimiento y validar una solución personalizada.":"Our advisory service is designed to adapt to any operational challenge. If your sector requires a specific application or a custom component, our technical team is ready to analyze your requirement and validate a tailored solution.",
+"¿Cuenta con planos, fotos o muestras físicas? Adjúntelos para agilizar el análisis técnico de su solicitud.":"Do you have drawings, photos or physical samples? Attach them to speed up the technical analysis of your request.",
+"Ejecución y Suministro Técnico":"Execution and Technical Supply",
+"Cepillos lineales":"Linear brushes","Tiras y bloques a la medida del equipo.":"Strips and blocks made to fit your equipment.",
+"Cepillos escobillones":"Bottle/tube brushes","Escobillones y cepillos de mano para limpieza técnica.":"Tube and hand brushes for technical cleaning.",
+"Cepillos de estructuras especiales":"Special-structure brushes","Diseños adaptados a la estructura y al equipo donde operan.":"Designs adapted to the structure and equipment where they operate."
+});
+
+if(document.documentElement.lang==='en')setLanguage('en');
+
+
+// Dos fotografías históricas en el recuadro original: se alternan sin mostrarlas juntas.
+(() => {
+  const gallery = document.querySelector('.legacy-archive-gallery');
+  if (!gallery) return;
+  const photos = Array.from(gallery.querySelectorAll('.legacy-slide'));
+  const selectors = Array.from(gallery.querySelectorAll('.legacy-photo-dot'));
+  if (photos.length < 2 || photos.length !== selectors.length) return;
+
+  let active = 0;
+  let paused = false;
+  let lastInteraction = 0;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function displayPhoto(index) {
+    active = index;
+    photos.forEach((photo, i) => {
+      const selected = i === active;
+      photo.classList.toggle('is-active', selected);
+      photo.setAttribute('aria-hidden', selected ? 'false' : 'true');
+    });
+    selectors.forEach((button, i) => {
+      const selected = i === active;
+      button.classList.toggle('is-active', selected);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+  }
+
+  selectors.forEach((button, i) => {
+    button.addEventListener('click', () => {
+      displayPhoto(i);
+      lastInteraction = Date.now();
+    });
+  });
+  gallery.addEventListener('mouseenter', () => { paused = true; });
+  gallery.addEventListener('mouseleave', () => { paused = false; });
+  gallery.addEventListener('focusin', () => { paused = true; });
+  gallery.addEventListener('focusout', () => { paused = false; });
+  displayPhoto(0);
+
+  if (!reduceMotion) {
+    window.setInterval(() => {
+      const rect = gallery.getBoundingClientRect();
+      const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (document.hidden || paused || !visible || Date.now() - lastInteraction < 12000) return;
+      displayPhoto((active + 1) % photos.length);
+    }, 7000);
+  }
+})();

@@ -19,7 +19,7 @@ ACTUALIZACIONES DE ESTA VERSIÓN
 7. “Nuestro Legado” conserva las cuatro generaciones y ahora incluye la fotografía del archivo histórico familiar disponible.
 8. La fotografía histórica se presenta como “archivo histórico familiar” sin atribuir identidades o una fecha específica que no estén documentadas en el archivo.
 9. Se mantiene el selector Español / Inglés y se agregaron las traducciones de los nuevos textos.
-10. El formulario sigue enviando la información a WhatsApp +502 3877 3515 y ahora prepara el mensaje en español o inglés según el idioma seleccionado.
+10. El formulario sigue enviando la información a WhatsApp +502 8008 0624 y ahora prepara el mensaje en español o inglés según el idioma seleccionado.
 11. No se agregaron Google Maps ni Waze.
 12. Facebook e Instagram permanecen listos para colocar los enlaces definitivos cuando sean proporcionados.
 13. Se eliminaron de la vista pública mensajes internos sobre una futura tienda en línea para mantener la página enfocada en el propósito industrial de DIMACSA.

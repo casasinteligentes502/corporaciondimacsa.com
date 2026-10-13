@@ -1,0 +1,7 @@
+DIMACSA — AJUSTE DE COMPOSICIÓN DEL LEGADO HISTÓRICO
+
+Se integró la fotografía nueva en el mismo panel de las fotografías históricas y el relato.
+En pantallas grandes hay dos columnas: dos fotografías superiores alineadas y, debajo, tercera fotografía junto a la historia. Separación de 20 px entre bloques.
+En teléfonos se apilan los elementos para preservar legibilidad y ver completas las imágenes.
+No se retiró ninguna de las tres fotografías ni se cambió contenido fuera de la sección histórica.
+Archivos modificados respecto a la entrega anterior: index.html y styles.css.
