@@ -325,13 +325,6 @@ function showNotice(message){
   clearTimeout(noticeTimer);
   noticeTimer=setTimeout(()=>notice.classList.remove('is-visible'),2600);
 }
-document.querySelectorAll('[data-social-pending]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const network=btn.dataset.socialPending;
-    const lang=document.documentElement.lang;
-    showNotice(lang==='en' ? `${network} link will be added soon.` : `El enlace de ${network} se agregará próximamente.`);
-  });
-});
 
 // In-place galleries, keeping the original image cards and their positions.
 const dimacsaGalleries = {"circulares": ["assets/images/web/p-cirA.webp", "assets/images/web/p-cirB.webp", "assets/images/web/p-cirC.webp", "assets/images/web/p-cirD.webp"], "cilindricos": ["assets/images/web/p-cilA.webp", "assets/images/web/p-cilB.webp", "assets/images/web/p-cilC.webp", "assets/images/web/p-cilD.webp", "assets/images/web/p-cilE.webp"], "lineales": ["assets/images/web/p-linA.webp", "assets/images/web/p-linB.webp"], "rotativos": ["assets/images/web/p-rotA.webp", "assets/images/web/p-rotB.webp", "assets/images/web/p-rotC.webp", "assets/images/web/p-rotD.webp", "assets/images/web/p-rotE.webp"], "escobillones": ["assets/images/web/p-escA.webp", "assets/images/web/p-escB.webp", "assets/images/web/p-escC.webp"], "especiales": ["assets/images/web/p-estA.webp", "assets/images/web/p-estB.webp", "assets/images/web/p-estC.webp", "assets/images/web/p-estD.webp", "assets/images/web/p-estE.webp"], "filtracion": ["assets/images/web/p-filt.webp", "assets/images/web/p-filt2.webp", "assets/images/web/galeria-filtracion.webp"]};
@@ -342,7 +335,6 @@ function showGalleryPhoto(){const img=galleryDialog.querySelector('img');img.src
 function openDimacsaGallery(key){currentPhotos=dimacsaGalleries[key]||[];if(!currentPhotos.length)return;currentPhotoIndex=0;showGalleryPhoto();galleryDialog.showModal();}
 document.querySelectorAll('[data-gallery]').forEach(card=>{card.addEventListener('click',()=>openDimacsaGallery(card.dataset.gallery));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDimacsaGallery(card.dataset.gallery);}});});
 galleryDialog.querySelector('.gallery-close').addEventListener('click',()=>galleryDialog.close());galleryDialog.querySelector('.gallery-prev').addEventListener('click',()=>{currentPhotoIndex=(currentPhotoIndex-1+currentPhotos.length)%currentPhotos.length;showGalleryPhoto();});galleryDialog.querySelector('.gallery-next').addEventListener('click',()=>{currentPhotoIndex=(currentPhotoIndex+1)%currentPhotos.length;showGalleryPhoto();});galleryDialog.addEventListener('click',e=>{if(e.target===galleryDialog)galleryDialog.close();});
-document.querySelectorAll('.nav-social').forEach(b=>b.addEventListener('click',()=>showNotice(document.documentElement.lang==='en' ? b.dataset.socialPending+' link pending.' : 'Enlace de '+b.dataset.socialPending+' pendiente de confirmar.')));
 
 // Movimiento solo dentro de los recuadros de proyectos
 (function(){

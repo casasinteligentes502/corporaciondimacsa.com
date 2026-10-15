@@ -1,0 +1,9 @@
+DIMACSA - Actualización de redes sociales y teléfono
+
+Archivos modificados: index.html, styles.css, app.js.
+- Facebook: https://www.facebook.com/profile.php?id=61594907200996
+- Instagram: https://www.instagram.com/dimacsagt/
+- Icono LinkedIn reemplazado por Instagram en el menú, sin inventar una cuenta LinkedIn.
+- Número empresarial único: +502 8008 0624 / tel:+50280080624 / WhatsApp wa.me/50280080624.
+- Se conserva el formulario para que los visitantes introduzcan su propio teléfono.
+- Se preservan los cambios anteriores de portada y ubicación del recuadro empresarial.
