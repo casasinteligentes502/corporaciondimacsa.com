@@ -1,0 +1,20 @@
+
+DIMACSA — Actualización 2026-10-15
+
+Cambios aplicados:
+1. Se agregó LinkedIn en la barra principal, sección de redes del contacto y pie de página.
+   URL: https://www.linkedin.com/in/selvin-marroquin-853210444/
+2. Se espació más la barra principal para una vista más limpia en escritorio y móvil.
+3. Se rediseñó la sección “Su necesidad, nuestra respuesta técnica” para mostrar 1 imagen debajo de cada recuadro.
+4. Se integraron 4 imágenes nuevas con marca de agua DIMACSA en:
+   - assets/images/web/proceso-requerimiento.webp
+   - assets/images/web/proceso-viabilidad.webp
+   - assets/images/web/proceso-propuesta.webp
+   - assets/images/web/proceso-ejecucion.webp
+5. Se aplicó protección básica contra descarga directa en esas imágenes (bloqueo de clic derecho/arrastre), sabiendo que no existe bloqueo absoluto en la web.
+6. Se mejoró la visualización para celular y computadora.
+
+Archivos principales modificados:
+- index.html
+- styles.css
+- app.js

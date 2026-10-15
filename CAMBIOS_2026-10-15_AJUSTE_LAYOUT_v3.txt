@@ -1,0 +1,1 @@
+Se corrigió el centrado profesional del menú, se reordenó el bloque de Aplicaciones y se alineó la sección del proceso técnico para una apariencia general más profesional.

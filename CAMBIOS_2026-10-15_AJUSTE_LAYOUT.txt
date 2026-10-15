@@ -1,0 +1,1 @@
+Ajustes aplicados: eliminación de espacios en blanco en Aplicaciones, alineación de imágenes en Proceso Técnico y centrado mejorado del menú principal.

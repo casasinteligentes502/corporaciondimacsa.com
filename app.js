@@ -415,3 +415,15 @@ if(document.documentElement.lang==='en')setLanguage('en');
     }, 7000);
   }
 })();
+
+
+// Basic image-protection deterrents (visual use remains unaffected).
+document.querySelectorAll('img[data-protect]').forEach(img => {
+  img.setAttribute('draggable', 'false');
+  img.addEventListener('dragstart', event => event.preventDefault());
+  img.addEventListener('contextmenu', event => {
+    event.preventDefault();
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
+    showNotice(lang === 'en' ? 'Image download is restricted on this page.' : 'La descarga directa de imágenes está restringida en esta página.');
+  });
+});
